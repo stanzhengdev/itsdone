@@ -1,12 +1,12 @@
 var baseUrl = 'http://localhost:8080/';
 
 angular.module('services', [])
-
-.factory('socket', function socket($rootScope) {
+//removed funtion signature
+.factory('socket', function ($rootScope) {
   var socket = io.connect(baseUrl);
   return {
     on: function (eventName, callback) {
-      socket.on(eventName, function () {  
+      socket.on(eventName, function () {
         var args = arguments;
         $rootScope.$apply(function () {
           callback.apply(socket, args);
@@ -21,7 +21,7 @@ angular.module('services', [])
             callback.apply(socket, args);
           }
         });
-      })
+      });
     }
   };
 })
@@ -40,7 +40,7 @@ angular.module('services', [])
     var postData = { name: name, password: password };
 
     $http.post(url, postData).success(function(response) {
-      if(response.success && (response.success == true || response.success == "true")) {
+      if(response.success && (response.success === true || response.success == "true")) {
         user = { name: response.name, id: response.id };
         window.localStorage.setItem('user', JSON.stringify(user));
         return deferred.resolve(response);
@@ -50,23 +50,23 @@ angular.module('services', [])
     }).error(function(error) {
       //Fail our promise.
       deferred.reject(error);
-    })
+    });
 
     return deferred.promise;
-  }
+  };
 
   var currentUser = function currentUser() {
     return user;
-  }
+  };
 
   var logout = function logout() {
     user = null;
     window.localStorage.removeItem('user');
-  }
+  };
 
   return {
     login: login,
     logout: logout,
     currentUser: currentUser
   };
-})
+});

@@ -7,21 +7,21 @@ angular.module('starter.controllers', ['services'])
 
 	$scope.login = function login(user) {
 		Auth.login(user.name, user.password).then(function(data) {
-			console.log('auth passed.')
+			console.log('auth passed.');
 			if(data.success) {
-				console.log('auth was successful.')
+				console.log('auth was successful.');
 
 				$state.go('app');
 			} else {
 				alert('Username / Password not valid. Try again');
 			}
-		})
-	}
+		});
+	};
 })
 
 .controller('AppCtrl', function($scope, $state, $filter, socket, Auth) {
 	//Ensure they are authed first.
-	if(Auth.currentUser() == null) {
+	if(Auth.currentUser() === null) {
 		$state.go('login');
 		return;
 	}
@@ -95,7 +95,7 @@ angular.module('starter.controllers', ['services'])
 
 		$scope.listeningChannels.push(channel);
 
-	}
+	};
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -111,14 +111,14 @@ angular.module('starter.controllers', ['services'])
 
 		//Listen to channel if we dont have it already.
 		if($scope.listeningChannels.indexOf(channel) == -1) {
-			$scope.listenChannel(channel);		
+			$scope.listenChannel(channel);
 		}
 
 		socket.emit('channel:join', { channel: channel, name: Auth.currentUser().name });
-	}
+	};
 
 	$scope.sendMessage = function sendMessage(draft) {
-		if(!draft.message || draft.message == null || typeof draft == 'undefined' || draft.length == 0) {
+		if(!draft.message || draft.message === null || typeof draft === undefined || draft.length === 0) {
 			return;
 		}
 		socket.emit('message:send', { message: draft.message, name: Auth.currentUser().name, channel: $scope.activeChannel });
@@ -128,8 +128,8 @@ angular.module('starter.controllers', ['services'])
 	$scope.logout = function logout() {
 		Auth.logout();
 		$state.go('login');
-	}
+	};
 
 	//Auto join the lobby
 	$scope.joinChannel('Lobby');
-})
+});
