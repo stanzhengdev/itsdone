@@ -16,7 +16,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
     return null; //nothing found
-  }
+  };
 })
 
 
@@ -43,7 +43,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       templateUrl: 'templates/menu.html',
       controller: 'AppCtrl'
     })
-
     .state('login', {
       url: '/login',
       templateUrl: 'templates/login.html',
@@ -53,4 +52,3 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 });
-
