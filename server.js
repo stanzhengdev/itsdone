@@ -1,7 +1,7 @@
 var Q = require('q');
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var redis = require('redis');
@@ -14,19 +14,19 @@ var PORT = 8080;
 var REDIS_PORT = 6379;
 var REDIS_HOST = 'localhost';
 
-var redisClient = redis.createClient(REDIS_PORT, REDIS_HOST)
-var redisPublishClient = redis.createClient(REDIS_PORT, REDIS_HOST)
+var redisClient = redis.createClient(REDIS_PORT, REDIS_HOST);
+var redisPublishClient = redis.createClient(REDIS_PORT, REDIS_HOST);
 
 var channelWatchList = [];
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded());
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 // parse application/vnd.api+json as json
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 //Include the client files as well.
 app.use(express.static(__dirname + '/client/RedisChat/www'));
@@ -39,7 +39,7 @@ var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-      
+
     // intercept OPTIONS method
     if ('OPTIONS' == req.method) {
       res.send(200);
@@ -68,7 +68,7 @@ app.post('/login', function(req, resp) {
   }
   connections += 1;
   resp.send({success: true, name: name, id: connections});
-})
+});
 
 function getMessages(channel) {
   var deferred = Q.defer();
@@ -93,32 +93,6 @@ function getChannels() {
   return channelWatchList;
 }
 
-function removeKeys() {
-  console.log('We are removing old messages');
-
-  for(var channelIndex in channelWatchList) {
-    var channel = channelWatchList[channelIndex];
-    var messageChannel = 'messages:' + channel;
-    console.log('message channel', messageChannel)
-    var timeToRemove = moment().subtract('m', 1).unix();
-
-    redisClient.zrangebyscore(messageChannel, 0, timeToRemove, function(err, result) {
-      // console.log('Removing: ', result);
-      if(result && result.length > 0) {
-        for (var resultIndex in result) {
-          var message = JSON.parse(result[resultIndex]);
-          // console.log('emitting: ', message);
-          io.emit('message:remove:channel:' + channel, { message: message, channel: channel });
-        }
-      }
-    });
-
-    redisClient.zremrangebyscore(messageChannel, 0, timeToRemove, function(err, result) {
-      console.log('Removed ', result, ' messages');
-    });
-  }
-}
-
 function populateChannels() {
   console.log('Populating channels from channels key');
   redisClient.zrangebyscore('channels', 0, '+inf', function(err, result) {
@@ -130,7 +104,6 @@ function populateChannels() {
 }
 
 populateChannels();
-var cleanUpMesssagesInterval = setInterval(removeKeys, 6000);
 
 io.on('connection', function(socket){
   var counter = 0;

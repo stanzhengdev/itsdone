@@ -14,8 +14,8 @@ server.listen(PORT, function() {
     console.log('RedisChat now listening on port: ' + PORT + '\n');
 });
 
-redisClient = redis.createClient(REDIS_PORT, REDIS_HOST)
-redisPublishClient = redis.createClient(REDIS_PORT, REDIS_HOST)
+redisClient = redis.createClient(REDIS_PORT, REDIS_HOST);
+redisPublishClient = redis.createClient(REDIS_PORT, REDIS_HOST);
 
 var connections = 0;
 
@@ -34,4 +34,3 @@ io.on('connection', function(socket){
   });
 
 });
-
