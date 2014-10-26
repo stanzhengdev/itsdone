@@ -132,4 +132,10 @@ angular.module('starter.controllers', ['services'])
 
 	//Auto join the lobby
 	$scope.joinChannel('Lobby');
+}).controller('TestCtrl', function($scope, $state, $filter, socket, Auth) {
+	//Ensure they are authed first.
+	if(Auth.currentUser() === null) {
+		$state.go('login');
+		return;
+	}; console.log("test")
 });
