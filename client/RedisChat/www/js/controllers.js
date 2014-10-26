@@ -135,6 +135,7 @@ angular.module('starter.controllers', ['services'])
 }).controller('ListingsCtrl', function($scope, $state, $filter, socket, Auth) {
 	//Ensure they are authed first.
 	$scope.items = [1,2,3];
+	$scope.userName = Auth.currentUser().name;
 	if(Auth.currentUser() === null) {
 		$state.go('login');
 		return;
