@@ -11,7 +11,7 @@ angular.module('starter.controllers', ['services'])
 			if(data.success) {
 				console.log('auth was successful.');
 
-				$state.go('app');
+				$state.go('listings');
 			} else {
 				alert('Username / Password not valid. Try again');
 			}
@@ -134,12 +134,20 @@ angular.module('starter.controllers', ['services'])
 	$scope.joinChannel('Product4213');
 }).controller('ListingsCtrl', function($scope, $state, $filter, socket, Auth) {
 	//Ensure they are authed first.
-	$scope.items = [1,2,3];
+	$scope.items = [
+		{"name": "Coffee", "price": 5},
+		{"name": "Math 201","price": 4},
+		{"name": "Website", "price": 20}
+		];
 	$scope.userName = Auth.currentUser().name;
 	if(Auth.currentUser() === null) {
 		$state.go('login');
 		return;
 	};
 
+	$scope.logout = function logout() {
+		Auth.logout();
+		$state.go('login');
+	};
 
 });
