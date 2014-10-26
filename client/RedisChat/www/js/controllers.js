@@ -139,7 +139,7 @@ angular.module('starter.controllers', ['services'])
 		{"name": "Math 201","price": 4},
 		{"name": "Website", "price": 20}
 		];
-	$scope.userName = Auth.currentUser().name;
+	$scope.userName = Auth.currentUser().name || "User";
 	if(Auth.currentUser() === null) {
 		$state.go('login');
 		return;
