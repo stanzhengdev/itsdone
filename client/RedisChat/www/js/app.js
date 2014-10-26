@@ -45,8 +45,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
     .state('listings', {
       url: '/listings',
-      templateUrl: 'templates/menu.html',
-      controller: 'TestCtrl'
+      templateUrl: 'templates/listing.html',
+      controller: 'ListingsCtrl'
     })
     .state('login', {
       url: '/login',
