@@ -13,10 +13,11 @@
         </ion-header-bar>
         <div class="bar bar-subheader">
           <!--Buy/sell Tags-->
-            <ion-tabs class="tabs-positive tabs-icon-only">
+            <ion-tabs class="tabs-positive">
 
             <ion-tab title="Home" icon-on="ion-ios7-filing" icon-off="ion-ios7-filing-outline">
               <!-- Tab 1 content -->
+              Buy
             </ion-tab>
 
             <ion-tab title="About" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline">
@@ -38,9 +39,11 @@
                       can-delete="true"
                       can-swipe="true"
                       on-delete="deleteItem(item)"
-                      ng-class="{completed: item.isCompleted}">
-              {{item.title}}
+                      ng-class="{completed: item.isCompleted}" class="item item-thumbnail-left" >
+              <img src="../img/venkman.jpg"></img>
+              <h2>{{item.title}}</h2>
               <i class="{{item.icon}}"></i>
+            </a>
             </ion-item>
           </ion-list>
         </ion-content>
