@@ -131,14 +131,17 @@ angular.module('starter.controllers', ['services'])
 	};
 
 	//Auto join the lobby
-	$scope.joinChannel('Product4213');
-}).controller('ListingsCtrl', function($scope, $state, $filter, socket, Auth) {
+	$scope.joinChannel('Coffee');
+})
+.controller('ListingsCtrl', function($scope, $state, $filter, socket, Auth) {
 	//Ensure they are authed first.
 	$scope.items = [
 		{"name": "Coffee", "price": 5},
 		{"name": "Math 201","price": 4},
 		{"name": "Website", "price": 20}
-		];
+	];
+ 	//console.log(Request("Info"));
+
 	$scope.userName = Auth.currentUser().name || "User";
 	if(Auth.currentUser() === null) {
 		$state.go('login');
