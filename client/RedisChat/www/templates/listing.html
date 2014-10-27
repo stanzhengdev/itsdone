@@ -9,22 +9,25 @@
         <button class="button button-icon icon ion-log-out" ng-click="logout()"></button>
       </div>
     </ion-header-bar>
-    <ion-content>
+  <ion-content id="content">
 
-	<ion-list>
-	  <ion-item ng-repeat="item in items">
-	    {{item.name}}
+  	<ion-list>
+  	  <ion-item ng-repeat="item in items">
+  	    {{item.name}}
 
-	    ${{item.price}}.00
-	  </ion-item>
-	</ion-list>
-  <div class="bar bar-footer">
-    <div class="tabs">
-      <a class="tab-item">Buy</a>
-      <a class="tab-item">Sell</a>
-      <a class="tab-item">Trending</a>
+  	    ${{item.price}}.00
+  	  </ion-item>
+  	</ion-list>
+  </ion-content>
+  <ion-footer-bar align-title="left">
+  <div class="bar bar-footer" >
+      <div class="tabs">
+        <a class="tab-item">Buy</a>
+        <a class="tab-item">Sell</a>
+        <a class="tab-item">Trending</a>
+      </div>
     </div>
-  </div>
+  </ion-footer-bar>
 
 	</ion-side-menus>
 
