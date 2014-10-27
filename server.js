@@ -8,6 +8,8 @@ var redis = require('redis');
 // var config = require('./libs/config');
 var moment = require('moment');
 
+
+//REDIS Client 
 var connections = 0;
 
 var PORT = 8080;
@@ -115,8 +117,8 @@ io.on('connection', function(socket){
 
   socket.on('user:joined', function(user) {
     var message = user.name + ' joined the room';
-    io.emit('user:joined', {message: message, time: moment(), expires: moment().add(10) })
-  })
+    io.emit('user:joined', {message: message, time: moment(), expires: moment().add(10) });
+  });
 
   socket.on('message:send', function(message){
     console.log('message: ' + message);
@@ -147,7 +149,6 @@ io.on('connection', function(socket){
     console.log('messages:' + channelInfo.channel);
 
     // socket.emit('messages:channel:' + channelInfo.channel, )
-
     //Add to watch to remove list.
     // for(var i = 0, j = channelWatchList.length; i < j; i++) {
     //   if()
