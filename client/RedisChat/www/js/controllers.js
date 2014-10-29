@@ -192,6 +192,7 @@ angular.module('starter.controllers', ['services'])
 	// Create the items
 	for(var i = 0; i < 10; i++) {
 		$scope.items.push({
+			id: i,
 			title: 'Task ' + (i + 1),
 			buttons: [{
 				text: 'Done',

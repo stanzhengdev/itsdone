@@ -43,11 +43,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       templateUrl: 'templates/menu.html',
       controller: 'AppCtrl'
     })
-    .state('listings', {
-      url: '/listings',
-      templateUrl: 'templates/listing.html',
-      controller: 'ListingsCtrl'
-    })
+    // .state('listings', {
+    //   url: '/listings',
+    //   templateUrl: 'templates/listing.html',
+    //   controller: 'ListingsCtrl'
+    // })
     .state('login', {
       url: '/login',
       templateUrl: 'templates/login.html',
@@ -58,8 +58,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       templateUrl: 'templates/service.html',
       controller: 'ServiceCtrl'
     })
-    .state('test', {
-      url: '/test',
+    .state('listings', {
+      url: '/listings',
       templateUrl: 'templates/test_listings.html',
       controller: 'TestCtrl'
     });
