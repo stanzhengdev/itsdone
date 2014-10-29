@@ -34,9 +34,9 @@
                       item="item"
                       buttons="item.buttons"
                       can-delete="true"
-                      can-swipe="false"
+                      can-swipe="true"
                       on-delete="deleteItem(item)"
-                      ng-class="{completed: item.isCompleted}" class="item" href="#/service/{{item.title"}} >
+                      class="item" href="#/service/{{item.title}}" >
 <!--               <img src="../img/venkman.jpg"></img> -->
               <h1>{{item.title}}</h1>
               <i class="{{item.icon}}"></i>

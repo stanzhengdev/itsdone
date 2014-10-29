@@ -177,27 +177,8 @@ angular.module('starter.controllers', ['services'])
 		$scope.settingsModal = modal;
 	});
 
-	var removeItem = function(item, button) {
-		$ionicActionSheet.show({
-			buttons: [{ text: '<b>Share</b> This' }, { text: '<b>Delete</b> This' }],
-			destructiveText: 'Delete Task',
-			cancelText: 'Cancel',
-			cancel: function() {
-				return true;
-			},
-			destructiveButtonClicked: function() {
-				$scope.items.splice($scope.items.indexOf(item), 1);
-				return true;
-			}
-		});
-	};
-
-	var completeItem = function(item, button) {
-		item.isCompleted = true;
-	};
-
 	$scope.onRefresh = function() {
-		console.log('ON REFRESH');
+		console.log('Refreshing');
 
 		$timeout(function() {
 			$scope.$broadcast('scroll.refreshComplete');
@@ -215,11 +196,9 @@ angular.module('starter.controllers', ['services'])
 			buttons: [{
 				text: 'Done',
 				type: 'button-success',
-				onButtonClicked: completeItem,
 			}, {
 				text: 'Delete',
 				type: 'button-danger',
-				onButtonClicked: removeItem,
 			}]
 		});
 	}
@@ -234,5 +213,8 @@ angular.module('starter.controllers', ['services'])
 })
 .controller('SellCtrl', function($scope) {
 	console.log("Sell");
-
+})
+.controller('ServiceCtrl', function($scope, $stateParams) {
+	$scope.test = $stateParams.id;
+	console.log($stateParams.id);
 });
