@@ -170,8 +170,6 @@ angular.module('starter.controllers', ['services'])
 		console.log(arguments);
 	};
 })
-
-
 .controller('HomeCtrl', function($scope, $timeout, $ionicModal, $ionicActionSheet) {
 	$scope.items = [];
 
@@ -198,21 +196,12 @@ angular.module('starter.controllers', ['services'])
 		item.isCompleted = true;
 	};
 
-	$scope.onReorder = function(el, start, end) {
-		ionic.Utils.arrayMove($scope.items, start, end);
-	};
-
 	$scope.onRefresh = function() {
 		console.log('ON REFRESH');
 
 		$timeout(function() {
 			$scope.$broadcast('scroll.refreshComplete');
 		}, 1000);
-	};
-
-
-	$scope.removeItem = function(item) {
-		removeItem(item);
 	};
 
 	$scope.newTask = function() {
@@ -240,4 +229,11 @@ angular.module('starter.controllers', ['services'])
 	$scope.close = function() {
 		$scope.modal.hide();
 	};
+})
+.controller('BuyCtrl', function($scope) {
+	console.log("Buy");
+})
+.controller('SellCtrl', function($scope) {
+	console.log("Sell");
+
 });
