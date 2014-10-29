@@ -9,7 +9,7 @@
 
         <ion-header-bar class="bar-positive">
           <button class="button button-clear" ng-click="newTask()">New</button>
-          <h1 class="title">Tasks</h1>
+          <h1 class="title">ItsDone</h1>
         </ion-header-bar>
         <div class="bar bar-subheader">
           <!--Buy/sell Tags-->
@@ -37,12 +37,15 @@
                       item="item"
                       buttons="item.buttons"
                       can-delete="true"
-                      can-swipe="true"
+                      can-swipe="false"
                       on-delete="deleteItem(item)"
-                      ng-class="{completed: item.isCompleted}" class="item item-thumbnail-left" >
-              <img src="../img/venkman.jpg"></img>
-              <h2>{{item.title}}</h2>
+                      ng-class="{completed: item.isCompleted}" class="item" >
+<!--               <img src="../img/venkman.jpg"></img> -->
+              <h1>{{item.title}}</h1>
               <i class="{{item.icon}}"></i>
+              <button class="button button-positive">
+                Buy
+              </button>
             </a>
             </ion-item>
           </ion-list>

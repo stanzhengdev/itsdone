@@ -181,7 +181,7 @@ angular.module('starter.controllers', ['services'])
 
 	var removeItem = function(item, button) {
 		$ionicActionSheet.show({
-			buttons: [],
+			buttons: [{ text: '<b>Share</b> This' }, { text: '<b>Delete</b> This' }],
 			destructiveText: 'Delete Task',
 			cancelText: 'Cancel',
 			cancel: function() {
@@ -208,7 +208,7 @@ angular.module('starter.controllers', ['services'])
 		$timeout(function() {
 			$scope.$broadcast('scroll.refreshComplete');
 		}, 1000);
-	}
+	};
 
 
 	$scope.removeItem = function(item) {
@@ -236,9 +236,8 @@ angular.module('starter.controllers', ['services'])
 	}
 
 })
-
 .controller('TaskCtrl', function($scope) {
 	$scope.close = function() {
 		$scope.modal.hide();
-	}
+	};
 });
