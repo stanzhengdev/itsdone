@@ -223,7 +223,6 @@ angular.module('starter.controllers', ['services'])
 			}]
 		});
 	}
-
 })
 .controller('TaskCtrl', function($scope) {
 	$scope.close = function() {
