@@ -9,12 +9,12 @@ var redis = require('redis');
 var moment = require('moment');
 
 
-//REDIS Client 
+//REDIS Client
 var connections = 0;
 
 var PORT = 8080;
-var REDIS_PORT = 6379;
-var REDIS_HOST = 'localhost';
+var REDIS_PORT = 6379 || Process.env.REDIS_PORT;
+var REDIS_HOST = 'localhost' || Process.env.REDIS_PORT;
 
 var redisClient = redis.createClient(REDIS_PORT, REDIS_HOST);
 var redisPublishClient = redis.createClient(REDIS_PORT, REDIS_HOST);
