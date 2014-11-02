@@ -7,7 +7,7 @@ var io = require('socket.io').listen(server);
 var redis = require('redis');
 // var config = require('./libs/config');
 var moment = require('moment');
-
+var url = require('url');
 
 //REDIS Client
 var connections = 0;
@@ -16,8 +16,16 @@ var PORT = 8080;
 var REDIS_PORT = 6379 || Process.env.REDIS_PORT;
 var REDIS_HOST = 'localhost' || Process.env.REDIS_PORT;
 
-var redisClient = redis.createClient(REDIS_PORT, REDIS_HOST);
-var redisPublishClient = redis.createClient(REDIS_PORT, REDIS_HOST);
+if (process.env.REDISCLOUD_URL) {
+  var redisURL = url.parse(process.env.REDISCLOUD_URL);
+  var redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
+  client.auth(redisURL.auth.split(":")[1]);
+  var redisPublishClient = redis.createClient(redisURL.port, redisURL.hostname);
+}
+else {
+  var redisClient = redis.createClient(REDIS_PORT, REDIS_HOST);
+  var redisPublishClient = redis.createClient(REDIS_PORT, REDIS_HOST);
+}
 
 var channelWatchList = [];
 
@@ -31,7 +39,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 //Include the client files as well.
-app.use(express.static(__dirname + '/client/RedisChat/www'));
+app.use(express.static(__dirname + '/client/app/www'));
 
 server.listen(PORT, function() {
     console.log('RedisChat now listening on port: ' + PORT + '\n');
