@@ -12,20 +12,17 @@ var url = require('url');
 //REDIS Client
 var connections = 0;
 
-var PORT = 8080;
-var REDIS_PORT = 6379 || Process.env.REDIS_PORT;
-var REDIS_HOST = 'localhost' || Process.env.REDIS_PORT;
+var redisURL = url.parse(process.env.REDISCLOUD_URL);
+var PORT = Process.env.PORT || 8080;
+var REDIS_PORT = redisURL.port || Process.env.REDIS_PORT || 6379;
+var REDIS_HOST = redisURL.hostname ||Process.env.REDIS_PORT || 'localhost';
 
-if (process.env.REDISCLOUD_URL) {
-  var redisURL = url.parse(process.env.REDISCLOUD_URL);
-  var redisClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
+if (process.env.REDISCLOUD_URL !== null) {
   client.auth(redisURL.auth.split(":")[1]);
-  var redisPublishClient = redis.createClient(redisURL.port, redisURL.hostname);
 }
-else {
-  var redisClient = redis.createClient(REDIS_PORT, REDIS_HOST);
-  var redisPublishClient = redis.createClient(REDIS_PORT, REDIS_HOST);
-}
+
+var redisClient = redis.createClient(REDIS_PORT, REDIS_HOST);
+var redisPublishClient = redis.createClient(REDIS_PORT, REDIS_HOST);
 
 var channelWatchList = [];
 
