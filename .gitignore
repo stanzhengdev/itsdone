@@ -31,3 +31,5 @@ platforms
 #explicit add sass
 client/www/css/ionic.app.css
 client/www/css/ionic.app.min.css
+
+dump.rdb
