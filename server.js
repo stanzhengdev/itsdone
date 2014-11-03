@@ -11,13 +11,17 @@ var url = require('url');
 
 //REDIS Client
 var connections = 0;
+var redisURL;
 
-var redisURL = url.parse(process.env.REDISCLOUD_URL);
-var PORT = Process.env.PORT || 8080;
-var REDIS_PORT = redisURL.port || Process.env.REDIS_PORT || 6379;
-var REDIS_HOST = redisURL.hostname ||Process.env.REDIS_PORT || 'localhost';
+var PORT = process.env.PORT || 8080;
+var REDIS_PORT = process.env.REDIS_PORT || 6379;
+var REDIS_HOST = process.env.REDIS_PORT || 'localhost';
 
-if (process.env.REDISCLOUD_URL !== null) {
+if (process.env.REDISCLOUD_URL !== undefined) {
+  console.log(process.env.REDISCLOUD_URL);
+  var REDIS_PORT = redisURL.port;
+  var REDIS_HOST = redisURL.hostname;
+  redisURL = url.parse(process.env.REDISCLOUD_URL);
   client.auth(redisURL.auth.split(":")[1]);
 }
 
