@@ -1,18 +1,37 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser');
+var morgan       = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser   = require('body-parser');
+var session      = require('express-session');
 
+var mongoose = require('mongoose');
+var passport = require('passport');
+var flash    = require('connect-flash');
 var moment = require('moment');
 
+var configDB = require('./config/database.js');
+
+require('./config/passport')(passport); // pass passport for configuration
+
+// configuration ===============================================================
+mongoose.connect(configDB.url); // connect to our database
+
+
 module.exports = function (redisClient, redisPublishClient, connections) {
+  app.set('redisClient', redisClient);
+  app.set('redisPublishClient',redisPublishClient);
+  app.set('connections', connections);
+  app.set('view engine', 'ejs');
+  app.set('views', 'app/views');
+
   // parse application/x-www-form-urlencoded
-  app.use(bodyParser.urlencoded());
+  app.use(cookieParser());
+  app.use(bodyParser.urlencoded({ extended: true }));
   // parse application/json
   app.use(bodyParser.json());
   // parse application/vnd.api+json as json
   app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-  //Include the client files as well.
-  app.use(express.static(__dirname + '/client/app/www'));
 
   var allowCrossDomain = function(req, res, next) {
       res.header('Access-Control-Allow-Origin', '*');
@@ -28,7 +47,19 @@ module.exports = function (redisClient, redisPublishClient, connections) {
       }
   };
   app.use(allowCrossDomain);
+    // required for passport
+  app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+  app.use(passport.initialize());
+  app.use(passport.session()); // persistent login sessions
+  app.use(flash()); // use connect-flash for flash messages stored in session
 
+  // routes ======================================================================
+  require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
+  // launch ======================================================================
+
+
+  //not going to move redis specific code.
   app.post('/login', function(req, resp) {
     // console.log(req);
     // console.log(req.param('name'));
@@ -48,5 +79,9 @@ module.exports = function (redisClient, redisPublishClient, connections) {
     connections += 1;
     resp.send({success: true, name: name, id: connections});
   });
+  //Include the client files as well.
+  app.use(express.static(__dirname + '/client/app/www'));
+
+
   return app;
 };
