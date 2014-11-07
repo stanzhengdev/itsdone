@@ -58,27 +58,6 @@ module.exports = function (redisClient, redisPublishClient, connections) {
 
   // launch ======================================================================
 
-
-  //not going to move redis specific code.
-  app.post('/login', function(req, resp) {
-    // console.log(req);
-    // console.log(req.param('name'));
-    var name = req.param('name');
-    var password = req.param('password');
-    if(!name || !password) {
-      resp.send('No username or password given. Please give correct credientials');
-      return;
-    }
-
-    console.log('Password attempt by: ' + name + ' at: ' + moment() );
-    if(password && password == 'letmein') {
-      //Add redis key for users
-      var userKey = 'user:' + name;
-      redisClient.set(userKey, moment(), redis.print);
-    }
-    connections += 1;
-    resp.send({success: true, name: name, id: connections});
-  });
   //Include the client files as well.
   app.use(express.static(__dirname + '/client/app/www'));
 
