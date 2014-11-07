@@ -14,6 +14,19 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	// Reponse SECTION =========================
+	app.get('/response', isLoggedIn, function(req, res) {
+		var user = req.user;
+		user.local.success = true;
+		console.log(user);
+		res.render('reponse.ejs', {
+			user : req.user,
+			json : JSON.stringify(user)
+		});
+	});
+
+
+
 	app.get('/app', isLoggedIn, function (req,res) {
 		res.send('you are logged in');
 	});
@@ -35,18 +48,11 @@ module.exports = function(app, passport) {
 			res.render('login.ejs', { message: req.flash('loginMessage') });
 		});
 
-		// process the login form
+		//process the login form
 		app.post('/login', passport.authenticate('local-login',
-		  /*
-{
-    "success": true,
-    "name": "stanley",
-    "id": 2
-} type of object return
-*/
 		{
-			successRedirect : '/profile', // redirect to the secure profile section
-			failureRedirect : '/login', // redirect back to the signup page if there is an error
+			successRedirect : '/response', // redirect to the secure profile section
+		//	failureRedirect : '/login', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		}
 		));
