@@ -25,6 +25,12 @@ module.exports = function(app, passport) {
 		});
 	});
 
+	app.get('/unsuccessful', function(req, res) {
+			res.render('reponse.ejs', {
+				json : JSON.stringify({"status":false})
+			});
+	});
+
 
 
 	app.get('/app', isLoggedIn, function (req,res) {
@@ -52,7 +58,7 @@ module.exports = function(app, passport) {
 		app.post('/login', passport.authenticate('local-login',
 		{
 			successRedirect : '/response', // redirect to the secure profile section
-		//	failureRedirect : '/login', // redirect back to the signup page if there is an error
+			failureRedirect : '/unsuccessful', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		}
 		));
@@ -65,8 +71,8 @@ module.exports = function(app, passport) {
 
 		// process the signup form
 		app.post('/signup', passport.authenticate('local-signup', {
-			successRedirect : '/profile', // redirect to the secure profile section
-			failureRedirect : '/signup', // redirect back to the signup page if there is an error
+			successRedirect : '/response', // redirect to the secure profile section
+			failureRedirect : '/unsuccessful', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		}));
 
