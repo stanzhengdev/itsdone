@@ -10,7 +10,8 @@ module.exports = function(app, passport) {
     product = new ProductModel({
       title: req.body.title,
       description: req.body.description,
-      style: req.body.style,
+      price: req.body.price,
+      provider: req.body.user,
     });
     product.save(function (err) {
       if (!err) {
@@ -56,11 +57,8 @@ module.exports = function(app, passport) {
     return ProductModel.findById(req.params.id, function (err, product) {
       product.title = req.body.title;
       product.description = req.body.description;
-      product.style = req.body.style;
-      product.images = req.body.images;
-      product.categories = req.body.categories;
-      product.catalogs = req.body.catalogs;
-      product.variants = req.body.variants;
+      product.price = req.body.price;
+      produce.provider = req.body.user;
       return product.save(function (err) {
         if (!err) {
           console.log("updated");

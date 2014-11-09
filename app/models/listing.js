@@ -6,7 +6,9 @@ var bcrypt   = require('bcrypt-nodejs');
 var listingSchema = mongoose.Schema({
   title: { type: String, required: true, unique: false },
   description: { type: String, required: true,  unique: false  },
-  style: { type: String },
+  price: { type: Number },
+  provider: { type: String },
+  closed: {type: Boolean, default: false},
   modified: { type: Date, default: Date.now }
 });
 
