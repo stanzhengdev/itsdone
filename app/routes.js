@@ -19,9 +19,11 @@ module.exports = function(app, passport) {
 		var user = req.user;
 		user.local.success = true;
 		console.log(user);
-		res.render('reponse.ejs', {
-			user : req.user,
-			json : JSON.stringify(user)
+		req.session.destroy(function(err) {
+			res.render('reponse.ejs', {
+				user : req.user,
+				json : JSON.stringify(user)
+			});
 		});
 	});
 
