@@ -55,7 +55,7 @@ module.exports = function (redisClient, redisPublishClient, connections) {
 
   // routes ======================================================================
   require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
-
+  require('./app/api.js')(app, passport); // load our routes and pass in our app and fully configured passport
   // launch ======================================================================
 
   //Include the client files as well.
