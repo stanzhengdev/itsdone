@@ -68,10 +68,10 @@ io.on('connection', function(socket){
     console.log('RedisChat - user disconnected');
   });
 
-  socket.on('user:joined', function(user) {
-    var message = user.name + ' has been connected';
-    io.emit('user:joined', {message: message, time: moment(), expires: moment().add(10) });
-  });
+  // socket.on('user:joined', function(user) {
+  //   var message = user.name + ' has been connected';
+  //   io.emit('user:joined', {message: message, time: moment(), expires: moment().add(10) });
+  // });
 
   socket.on('message:send', function(message){
     console.log('message: ' + message);
