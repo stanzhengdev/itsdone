@@ -69,18 +69,18 @@ io.on('connection', function(socket){
   });
 
   socket.on('user:joined', function(user) {
-    var message = user.name + ' joined the room';
+    var message = user.name + ' has been connected';
     io.emit('user:joined', {message: message, time: moment(), expires: moment().add(10) });
   });
 
   socket.on('message:send', function(message){
     console.log('message: ' + message);
     console.log(JSON.stringify(message));
-    // var messageKey = 'message:' + message.name;
-    // console.log('Storing key: ' + messageKey);
+     var messageKey = 'message:' + message.name;
+    //   console.log('Storing key: ' + messageKey);
     var messageObj = { message: message.message, name: message.name, time: moment(), expires: moment().add('m', 2).unix() };
-    // console.log('this: ' + JSON.stringify(messageObj));
-    // redisClient.set(messageKey, JSON.stringify(messageObj), redis.print);
+     console.log('this: ' + JSON.stringify(messageObj));
+     redisClient.set(messageKey, JSON.stringify(messageObj), redis.print);
     // redisClient.expire(messageKey, 600);
 
     console.log('storing to set: messages:' + message.channel);
