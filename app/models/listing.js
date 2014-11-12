@@ -8,6 +8,7 @@ var listingSchema = mongoose.Schema({
   description: { type: String, required: true,  unique: false  },
   price: { type: Number },
   provider: { type: String },
+  subscribers: {type: Array}, //, unique: true?
   closed: {type: Boolean, default: false},
   modified: { type: Date, default: Date.now }
 });
