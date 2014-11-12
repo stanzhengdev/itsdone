@@ -121,4 +121,27 @@ module.exports = function(app, passport) {
       });
     });
   });
+
+  //Subsciptions
+ app.post('/api/products/subscribe', function (req,res) {
+   console.log(req.body);
+   return ProductModel.findById(req.body.id, function (err, product) {
+     //save the info
+     console.log(product);
+     if (product.subscribers.indexOf(req.body.user)>=0){
+       res.send("already subscribed redirect");
+     }
+     product.subscribers.push(req.body.user);
+     return product.save(function (err) {
+       if (!err){
+         console.log("subscribed");
+         return res.send('success');
+       }
+       else {
+         console.log(err);
+         res.end('error');
+       }
+     });
+   });
+ });
 };
