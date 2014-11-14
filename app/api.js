@@ -20,7 +20,7 @@ module.exports = function(app, passport) {
       title: req.body.title,
       description: req.body.description,
       price: req.body.price,
-      provider: req.body.user,
+      provider: req.body.provider.name,
       tags: tags
     });
     product.save(function (err) {

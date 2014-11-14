@@ -8,12 +8,12 @@ var listingSchema = mongoose.Schema({
   description: { type: String, required: true,  unique: false  },
   price: { type: Number },
   provider: { type: String },
-  subscribers: {type: Array}, //, unique: true?
+  subscribers: {type: Array, default: false}, //, unique: true?
   closed: {type: Boolean, default: false},
   modified: { type: Date, default: Date.now },
   created: { type: Date, default: Date.now },
-  tags: {type: Array},
-  reviews: {type: Array}
+  tags: {type: Array, default: []},
+  reviews: {type: Array, default: []}
 });
 
 
