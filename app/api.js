@@ -7,11 +7,15 @@ module.exports = function(app, passport) {
     var product;
     console.log("POST: ");
     console.log(req.body);
+
+    var tags = req.body.tags.split(' ');
+    //laundry wash clean
     product = new ProductModel({
       title: req.body.title,
       description: req.body.description,
       price: req.body.price,
       provider: req.body.user,
+      tags: tags
     });
     product.save(function (err) {
       if (!err) {
@@ -76,6 +80,9 @@ module.exports = function(app, passport) {
   app.get('/api/products', function (req, res) {
     return ProductModel.find(function (err, products) {
       if (!err) {
+        // HACKTICIAN
+        //calculate score for service
+        
         return res.send(products);
       } else {
         return console.log(err);
