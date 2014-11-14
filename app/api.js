@@ -5,10 +5,16 @@ module.exports = function(app, passport) {
   // POST to CREATE
   app.post('/api/products', function (req, res) {
     var product;
+    var tags;
     console.log("POST: ");
     console.log(req.body);
+    if ( req.body.tags !== ''){
+       tags = req.body.tags.split(' ');
+    }
+    else {
+      tags = [];
+    }
 
-    var tags = req.body.tags.split(' ');
     //laundry wash clean
     product = new ProductModel({
       title: req.body.title,
