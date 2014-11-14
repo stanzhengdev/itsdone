@@ -82,7 +82,7 @@ module.exports = function(app, passport) {
       if (!err) {
         // HACKTICIAN
         //calculate score for service
-        
+
         return res.send(products);
       } else {
         return console.log(err);
@@ -151,4 +151,32 @@ module.exports = function(app, passport) {
      });
    });
  });
+
+ //reviews
+
+app.post('/api/products/reviews', function (req,res) {
+  console.log(req.body);
+  return ProductModel.findById(req.body.id, function (err, product) {
+    //save the info
+    console.log(product);
+    //prefille reviews
+
+    product.reviews.push({
+      body: req.body.body,
+      title: req.body.title,
+      stars: req.body.stars,
+      time: Date.now()
+    });
+    return product.save(function (err) {
+      if (!err){
+        console.log("review added");
+        return res.send('added review');
+      }
+      else {
+        console.log(err);
+        res.end('error');
+      }
+    });
+  });
+});
 };
