@@ -53,13 +53,22 @@ module.exports = function(app, passport) {
 		// LOGIN ===============================
 		// show the login form
 		app.get('/login', function(req, res) {
-			res.render('login.ejs', { message: req.flash('loginMessage') });
+			//res.render('login.ejs', { message: req.flash('loginMessage') });
+			var user = req.user;
+			user.local.success = true;
+			console.log(user);
+			req.session.destroy(function(err) {
+				res.render('reponse.ejs', {
+					user : req.user,
+					json : JSON.stringify(user)
+				});
+			});
 		});
 
 		//process the login form
 		app.post('/login', passport.authenticate('local-login',
 		{
-			successRedirect : '/response', // redirect to the secure profile section
+			successRedirect : '/login', // redirect to the secure profile section
 			failureRedirect : '/unsuccessful', // redirect back to the signup page if there is an error
 			failureFlash : true // allow flash messages
 		}
