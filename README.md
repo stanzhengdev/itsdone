@@ -3,6 +3,13 @@ Itsdone
 
 Uses - Quick project demonstrating how to use Socket.io / Redis / and Ionic to have a simple chat applications with expiring messages
 
+Screenshots
+---
+**Tip click and drag to view a screenshot longer**   
+
+<a href="http://imgur.com/5dmJ9RG"><img src="http://i.imgur.com/5dmJ9RG.gif" title="source: imgur.com" width="300px": /></a>
+
+
 ## Requirements
 
 * [Redis](http://redis.io) `brew install redis`
