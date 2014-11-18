@@ -8,7 +8,8 @@ Uses - Quick project demonstrating how to use Socket.io / Redis / and Ionic to h
 * [Redis](http://redis.io) `brew install redis`
 * [Node.js & npm](https://gist.github.com/isaacs/579814)
 * MongoDB
-* Azure
+* Ionic Framework
+* Phonegap
 
 
 ## Requirements for Mobile
