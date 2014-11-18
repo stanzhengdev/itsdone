@@ -11,6 +11,7 @@ Uses - Quick project demonstrating how to use Socket.io / Redis / and Ionic to h
 * Ionic Framework
 * Phonegap
 
+See the app repo [ItsDone](http://github.com/stanzheng/itsdoneapp)
 
 ## Requirements for Mobile
 
