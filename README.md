@@ -13,7 +13,7 @@ Uses - Quick project demonstrating how to use Socket.io / Redis / and Ionic to h
 
 See the app repo [ItsDone](http://github.com/stanzheng/itsdoneapp)
 =====
-
+This is just the backend service, the main app is there
 
 
 
