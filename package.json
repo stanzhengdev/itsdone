@@ -1,7 +1,7 @@
 {
   "name": "itsdone",
-  "version": "0.1.1",
-  "description": "Quick chat client using redis, Socket.io, AngularJS, and Cordova",
+  "version": "0.9.1",
+  "description": "Get things done.  chat client using redis, Socket.io, AngularJS, and Cordova wrapped up",
   "main": "chat.js",
   "dependencies": {
     "bcrypt-nodejs": "latest",
