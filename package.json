@@ -15,7 +15,7 @@
     "express-session": "~1.15.6",
     "lodash": "^2.4.1",
     "method-override": "~2.3.10",
-    "moment": "~2.15.2",
+    "moment": "~2.19.3",
     "mongoose": "~4.11.14",
     "morgan": "^1.4.1",
     "passport": "~0.1.17",
